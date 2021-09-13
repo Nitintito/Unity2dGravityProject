@@ -17,7 +17,6 @@ public class S_2DCamera : MonoBehaviour
         if (focusTarget != null)
         {
             transform.position = focusTarget.transform.position;
-            transform.rotation = focusTarget.transform.rotation;
         }
     }
 }

@@ -11,22 +11,23 @@ public class S_Movement : MonoBehaviour
     public float dashForce = 30;
     public float rotationSpeed = 5;
 
-
     private bool requestMove;
     private bool requestJump;
     private bool requestDash;
     private bool requestDownDash;
 
-
     Vector2 gravityDirection;
     Vector2 upAxis;
     Vector2 velocity;
+
+    
 
     private Rigidbody2D rb;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        S_UiManager.levelFaild = false;
     }
 
     private void Update()
@@ -113,6 +114,15 @@ public class S_Movement : MonoBehaviour
         rb.AddForce(dashVector, ForceMode2D.Impulse);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Trap"))
+        {
+            Destroy(gameObject);
+            S_UiManager.levelFaild = true;
+        }
+    }
+
     private void CheckForInput()
     {
         if (Input.GetAxis("Horizontal") != 0)
@@ -122,11 +132,5 @@ public class S_Movement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
             requestJump = true;
-
-        if (Input.GetButtonDown("Dash"))
-            requestDash = true;
-
-        if (Input.GetButtonDown("Down"))
-            requestDownDash = true;
     }
 }
