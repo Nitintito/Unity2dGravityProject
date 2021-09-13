@@ -28,6 +28,8 @@ public class S_Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         S_UiManager.levelFaild = false;
+            rb.gravityScale = 0;
+
     }
 
     private void Update()
@@ -68,12 +70,11 @@ public class S_Movement : MonoBehaviour
 
         if (upAxis.x != 0 || upAxis.y != 0)
         {
-            rb.gravityScale = 0;
             rb.AddForce(gravityDirection);
         }
         else
         {
-            rb.AddForce(Physics2D.gravity);
+            rb.AddForce(Physics2D.gravity * 2);
             upAxis = -Physics2D.gravity.normalized; // this needs to be her idk why it dose not work
         }
 
@@ -86,6 +87,7 @@ public class S_Movement : MonoBehaviour
         Vector2 movementVector = new Vector2(movementDirection, 0);
 
         rb.AddForce(movementVector);
+        //rb.AddForce(transform.right * movementSpeed * horizontalInput);
     }
 
     private void Rotation()
