@@ -8,18 +8,6 @@ public class S_Gun : MonoBehaviour
     [SerializeField]GameObject projectile;
     [SerializeField]Transform firePoint;
 
-    Rigidbody2D rb;
-
-    bool requestShoot;
-
-
-
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-       // mousPos = Input.mousePosition;
-    }
-
     private void Update()
     {
         Rotate();
@@ -28,8 +16,6 @@ public class S_Gun : MonoBehaviour
             Debug.Log("shoot");
             Shoot();
         }
-        else
-            requestShoot = false;
     }
 
     private void Rotate()

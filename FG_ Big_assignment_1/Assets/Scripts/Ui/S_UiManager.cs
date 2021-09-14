@@ -12,7 +12,7 @@ public class S_UiManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (pausMenuCanvas.active == false)
+            if (pausMenuCanvas.activeSelf == false)
                 pausMenuCanvas.SetActive(true);
             else
                 pausMenuCanvas.SetActive(false);

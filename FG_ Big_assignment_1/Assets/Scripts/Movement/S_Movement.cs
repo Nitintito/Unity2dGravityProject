@@ -3,38 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class S_Movement : MonoBehaviour
+public class S_Player : MonoBehaviour
 {
-    public float movementSpeed = 30;
-    public float jumpForce = 30;
-    public float dashDownForce = 30;
-    public float dashForce = 30;
-    public float rotationSpeed = 5;
+    [SerializeField] private float movementSpeed = 30;
+    public float startFule = 3;
+    [HideInInspector] public float currentFule;
+    [SerializeField] private float jumpForce = 30;
+    [SerializeField] private float rotationSpeed = 5;
+    [SerializeField] private float dashForce = 30;
 
     private bool requestMove;
     private bool requestJump;
     private bool requestDash;
-    private bool requestDownDash;
 
     Vector2 gravityDirection;
     Vector2 upAxis;
     Vector2 velocity;
 
-    
-
     private Rigidbody2D rb;
+
+    [SerializeField] private S_FuleUi fuleUi;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         S_UiManager.levelFaild = false;
-            rb.gravityScale = 0;
+        rb.gravityScale = 0;
+    }
 
+    private void Start()
+    {
+        currentFule = startFule;
+        fuleUi.SetMaxFule(currentFule);
     }
 
     private void Update()
     {
         CheckForInput();
+        UpdateFule();
     }
 
     private void FixedUpdate()
@@ -44,7 +50,7 @@ public class S_Movement : MonoBehaviour
 
         if (requestMove)
         {
-            Move();
+            Move(currentFule);
         }
         if (requestJump /*and not in air*/)
         {
@@ -55,11 +61,6 @@ public class S_Movement : MonoBehaviour
         {
             requestDash = false;
             Dash();
-        }
-        if (requestDownDash)
-        {
-            requestDownDash = false;
-            DashDown();
         }
     }
 
@@ -74,20 +75,34 @@ public class S_Movement : MonoBehaviour
         }
         else
         {
-            rb.AddForce(Physics2D.gravity * 2);
+            rb.AddForce(Physics2D.gravity);
             upAxis = -Physics2D.gravity.normalized; // this needs to be her idk why it dose not work
         }
-
     }
 
-    private void Move()
+    private void UpdateFule()
     {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float movementDirection = horizontalInput * movementSpeed;
-        Vector2 movementVector = new Vector2(movementDirection, 0);
+        if (requestMove && currentFule > 0)
+        {
+            currentFule -= Time.deltaTime;
+            fuleUi.SetFule(currentFule);
+        }
+    }
 
-        rb.AddForce(movementVector);
-        //rb.AddForce(transform.right * movementSpeed * horizontalInput);
+    private void Move(float fule)
+    {
+        if (fule > 0)
+        {
+            float horizontalInput = Input.GetAxisRaw("Horizontal");
+            float verticalInput = Input.GetAxisRaw("Vertical");
+
+            float movementDirectionHorizontal = horizontalInput * movementSpeed;
+            float movementDirectionVertical = verticalInput * movementSpeed;
+
+            Vector2 movementVector = new Vector2(movementDirectionHorizontal, movementDirectionVertical);
+
+            rb.AddForce(movementVector);
+        }
     }
 
     private void Rotation()
@@ -99,12 +114,6 @@ public class S_Movement : MonoBehaviour
     {
         Vector2 jumpDirection = upAxis * jumpForce;
         rb.AddForce(jumpDirection, ForceMode2D.Impulse);
-    }
-
-    private void DashDown()
-    {
-        Vector2 direction = -upAxis * jumpForce;
-        rb.AddForce(direction, ForceMode2D.Impulse);
     }
 
     private void Dash()
@@ -127,7 +136,7 @@ public class S_Movement : MonoBehaviour
 
     private void CheckForInput()
     {
-        if (Input.GetAxis("Horizontal") != 0)
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
             requestMove = true;
         else
             requestMove = false;

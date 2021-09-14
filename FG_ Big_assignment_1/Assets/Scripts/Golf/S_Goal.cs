@@ -21,7 +21,7 @@ public class S_Goal : MonoBehaviour
     {
         if (winUiCanvas != null)
         {
-            winUiCanvas.gameObject.active = true;
+            winUiCanvas.SetActive(true);
         }
     }
 }
