@@ -10,7 +10,7 @@ public class S_Goal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("GolfBall"))
+        if (other.CompareTag("Player"))
         {
             winUiCanvas.SetActive(true);
             Debug.Log("You Win!");

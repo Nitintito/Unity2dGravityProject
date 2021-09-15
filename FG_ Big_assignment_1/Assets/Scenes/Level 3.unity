@@ -134,10 +134,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2729072782723972549, guid: 3b8bfa056e4aa8f4894e687688edf540, type: 3}
-      propertyPath: movementSpeed
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 2729072782723972550, guid: 3b8bfa056e4aa8f4894e687688edf540, type: 3}
       propertyPath: m_LocalPosition.x
       value: -127.6
@@ -215,6 +211,14 @@ PrefabInstance:
       value: Restart
       objectReference: {fileID: 0}
     - target: {fileID: 6146647502057101335, guid: 3b8bfa056e4aa8f4894e687688edf540, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762821993053152931, guid: 3b8bfa056e4aa8f4894e687688edf540, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762821993053152931, guid: 3b8bfa056e4aa8f4894e687688edf540, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
