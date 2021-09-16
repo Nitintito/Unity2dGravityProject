@@ -49,7 +49,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
 --- !u!114 &8279358417672198823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +62,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf16db56d4e3f1409211fe02d4478ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5877738750412944783, guid: 9b8a02a58adbbcb4d970d4a7bfa21a5a, type: 3}
 --- !u!198 &3397855465627510734
 ParticleSystem:
   m_ObjectHideFlags: 0

@@ -3,30 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class S_Movement : MonoBehaviour
+public class S_Player : MonoBehaviour
 {
     [SerializeField] private float movementSpeed = 30;
-    public float startFule = 3;
-    [HideInInspector] public float currentFule; 
-    [SerializeField] private float jumpForce = 30;
-    [SerializeField] private float rotationSpeed = 5;
     [SerializeField] private float dashForce = 30;
+    public float startFule = 3;
+    [SerializeField] private float dashFuleCost = 1.5f;
+    [SerializeField] private float rotationSpeed = 5;
+
+    [HideInInspector] public float currentFule; 
 
     private bool requestMove;
-    private bool requestJump;
     private bool requestDash;
+
+    private float horizontalInput, verticalInput;
 
     Vector2 gravityDirection;
     Vector2 upAxis;
-    Vector2 velocity;
 
     private Rigidbody2D rb;
+    S_FuleUi fuleUi;
 
-    [SerializeField] private S_FuleUi fuleUi;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        fuleUi = FindObjectOfType<S_FuleUi>();
         S_UiManager.levelFaild = false;
         rb.gravityScale = 0;
     }
@@ -47,23 +49,13 @@ public class S_Movement : MonoBehaviour
     {
         Gravity();
         Rotation();
-
-        if (requestMove)
-        {
-            Move(currentFule);
-        }
-        if (requestJump /*and not in air*/)
-        {
-            requestJump = false;
-            Jump();
-        }
-        if (requestDash)
-        {
-            requestDash = false;
-            Dash();
-        }
+        RequestedInput();
     }
 
+    private void Rotation()
+    {
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(transform.forward, upAxis), rotationSpeed * Time.deltaTime); //transfrom.rotate in the direction of forwardAxis
+    }
     private void Gravity()
     {
         upAxis = -Physics2D.gravity.normalized;
@@ -90,41 +82,34 @@ public class S_Movement : MonoBehaviour
         }
     }
 
-    private void Move(float fule)
+    private void Movement(float currentFule, bool dash)
     {
-        if (fule > 0)
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
+
+        if (currentFule > 0)
         {
-            float horizontalInput = Input.GetAxisRaw("Horizontal");
-            float verticalInput = Input.GetAxisRaw("Vertical");
+            if (!dash)
+            {
+                float movementDirectionHorizontal = horizontalInput * movementSpeed;
+                float movementDirectionVertical = verticalInput * movementSpeed;
 
-            float movementDirectionHorizontal = horizontalInput * movementSpeed;
-            float movementDirectionVertical = verticalInput * movementSpeed;
+                Vector2 movementVector = new Vector2(movementDirectionHorizontal, movementDirectionVertical);
 
-            Vector2 movementVector = new Vector2(movementDirectionHorizontal, movementDirectionVertical);
+                rb.AddForce(movementVector);
+            }
+            else
+            {
+                float movementDirectionHorizontal = horizontalInput * dashForce;
+                float movementDirectionVertical = verticalInput * dashForce;
 
-            rb.AddForce(movementVector);
+                Vector2 dashVector = new Vector2(movementDirectionHorizontal, movementDirectionVertical);
+
+                rb.AddForce(dashVector, ForceMode2D.Impulse);
+            }
         }
     }
 
-    private void Rotation()
-    {
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(transform.forward, upAxis), rotationSpeed * Time.deltaTime); //transfrom.rotate in the direction of forwardAxis
-    }
-
-    private void Jump()
-    {
-        Vector2 jumpDirection = upAxis * jumpForce;
-        rb.AddForce(jumpDirection, ForceMode2D.Impulse);
-    }
-
-    private void Dash()
-    {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float dashDirection = horizontalInput * dashForce;
-        Vector2 dashVector = new Vector2(dashDirection, 0);
-
-        rb.AddForce(dashVector, ForceMode2D.Impulse);
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -135,6 +120,21 @@ public class S_Movement : MonoBehaviour
         }
     }
 
+    private void RequestedInput()
+    {
+        if (requestMove)
+        {
+            Movement(currentFule, false);
+        }
+
+        if (requestDash)
+        {
+            requestDash = false;
+            Movement(currentFule, true);
+            currentFule -= dashFuleCost;
+        }
+    }
+
     private void CheckForInput()
     {
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
@@ -142,7 +142,7 @@ public class S_Movement : MonoBehaviour
         else
             requestMove = false;
 
-        if (Input.GetButtonDown("Jump"))
-            requestJump = true;
+        if (Input.GetButtonDown("Dash"))
+            requestDash = true;
     }
 }

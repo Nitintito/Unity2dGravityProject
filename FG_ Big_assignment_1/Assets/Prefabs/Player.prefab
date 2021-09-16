@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 5877738750412944781}
   - component: {fileID: 5877738750412944786}
   - component: {fileID: 5877738750412944787}
-  - component: {fileID: 5877738750412944783}
+  - component: {fileID: 4584740761036321580}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -254,7 +254,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &5877738750412944783
+--- !u!114 &4584740761036321580
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,11 +267,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 20
-  startFule: 3
-  currentFule: 0
-  jumpForce: 30
-  rotationSpeed: 5
   dashForce: 20
+  startFule: 3
+  dashFuleCost: 1.5
+  rotationSpeed: 5
+  currentFule: 0
   fuleUi: {fileID: 0}
 --- !u!1 &7765716730638349068
 GameObject:
