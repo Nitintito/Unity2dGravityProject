@@ -2132,7 +2132,6 @@ GameObject:
   - component: {fileID: 5557052381063617242}
   - component: {fileID: 3138904736792410427}
   - component: {fileID: 362399090474157501}
-  - component: {fileID: 2950980507608862118}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2218,26 +2217,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   focusTarget: {fileID: 0}
---- !u!114 &2950980507608862118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3724457021073819436}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AssetsPPU: 100
-  m_RefResolutionX: 320
-  m_RefResolutionY: 180
-  m_UpscaleRT: 0
-  m_PixelSnapping: 0
-  m_CropFrameX: 0
-  m_CropFrameY: 0
-  m_StretchFill: 0
 --- !u!1 &3760353453074152305
 GameObject:
   m_ObjectHideFlags: 0
@@ -2786,10 +2765,70 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2729072783524371580}
     m_Modifications:
+    - target: {fileID: 2021235908870312694, guid: 9b8a02a58adbbcb4d970d4a7bfa21a5a, type: 3}
+      propertyPath: TrailModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021235908870312694, guid: 9b8a02a58adbbcb4d970d4a7bfa21a5a, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021235908870312694, guid: 9b8a02a58adbbcb4d970d4a7bfa21a5a, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021235908870312694, guid: 9b8a02a58adbbcb4d970d4a7bfa21a5a, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021235908870312694, guid: 9b8a02a58adbbcb4d970d4a7bfa21a5a, type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxColor.b
+      value: 0.97016376
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021235908870312694, guid: 9b8a02a58adbbcb4d970d4a7bfa21a5a, type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021235908870312694, guid: 9b8a02a58adbbcb4d970d4a7bfa21a5a, type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxColor.r
+      value: 0.08962262
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021235908870312694, guid: 9b8a02a58adbbcb4d970d4a7bfa21a5a, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021235908870312694, guid: 9b8a02a58adbbcb4d970d4a7bfa21a5a, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxColor.g
+      value: 0.7410011
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021235908870312694, guid: 9b8a02a58adbbcb4d970d4a7bfa21a5a, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3589165017778095004, guid: 9b8a02a58adbbcb4d970d4a7bfa21a5a, type: 3}
+      propertyPath: m_MinParticleSize
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 3589165017778095004, guid: 9b8a02a58adbbcb4d970d4a7bfa21a5a, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3589165017778095004, guid: 9b8a02a58adbbcb4d970d4a7bfa21a5a, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 4584740761036321580, guid: 9b8a02a58adbbcb4d970d4a7bfa21a5a, type: 3}
       propertyPath: fuleUi
       value: 
       objectReference: {fileID: 1811897305877018814}
+    - target: {fileID: 4584740761036321580, guid: 9b8a02a58adbbcb4d970d4a7bfa21a5a, type: 3}
+      propertyPath: particleSpawner
+      value: 
+      objectReference: {fileID: 3801126540103600099}
+    - target: {fileID: 4584740761036321580, guid: 9b8a02a58adbbcb4d970d4a7bfa21a5a, type: 3}
+      propertyPath: jetPackParticles
+      value: 
+      objectReference: {fileID: 3801126540103600099}
     - target: {fileID: 5877738750412944780, guid: 9b8a02a58adbbcb4d970d4a7bfa21a5a, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2851,5 +2890,10 @@ PrefabInstance:
 --- !u!4 &2729072782723972550 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5877738750412944780, guid: 9b8a02a58adbbcb4d970d4a7bfa21a5a, type: 3}
+  m_PrefabInstance: {fileID: 8380760737875462218}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3801126540103600099 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4651691809564839849, guid: 9b8a02a58adbbcb4d970d4a7bfa21a5a, type: 3}
   m_PrefabInstance: {fileID: 8380760737875462218}
   m_PrefabAsset: {fileID: 0}

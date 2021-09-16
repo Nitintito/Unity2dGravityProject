@@ -21,6 +21,7 @@ public class S_Goal : MonoBehaviour
             winUiCanvas.SetActive(true);
             S_LevelSelectMenu.unlockedLevels += 1;
             Debug.Log("You Win!");
+            PlayerPrefs.SetInt("Unlocked Levels", S_LevelSelectMenu.unlockedLevels);
         }
     }
 

@@ -10,8 +10,11 @@ public class S_Player : MonoBehaviour
     public float startFule = 3;
     [SerializeField] private float dashFuleCost = 1.5f;
     [SerializeField] private float rotationSpeed = 5;
+    [SerializeField] GameObject jetPackParticles;
+    [SerializeField] private float jetPackRotationSpeed = 10;
 
-    [HideInInspector] public float currentFule; 
+    [HideInInspector] public float currentFule;
+
 
     private bool requestMove;
     private bool requestDash;
@@ -43,6 +46,7 @@ public class S_Player : MonoBehaviour
     {
         CheckForInput();
         UpdateFule();
+        ParticleSpawner();
     }
 
     private void FixedUpdate()
@@ -113,7 +117,7 @@ public class S_Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Trap") )
+        if (collision.gameObject.CompareTag("Trap"))
         {
             Destroy(gameObject);
             if (!S_Goal.win)
@@ -140,7 +144,7 @@ public class S_Player : MonoBehaviour
 
     private void CheckForInput()
     {
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        if (Input.GetAxis("Horizontal") != 0 || (Input.GetAxis("Vertical") != 0))
             requestMove = true;
         else
             requestMove = false;
@@ -148,4 +152,22 @@ public class S_Player : MonoBehaviour
         if (Input.GetButtonDown("Dash"))
             requestDash = true;
     }
+
+    private void ParticleSpawner()
+    {
+        Quaternion savedRotation = jetPackParticles.transform.rotation; ;
+        float angle = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * Mathf.Rad2Deg;
+        if (Input.GetAxis("Horizontal") != 0 && currentFule > 0 || (Input.GetAxis("Vertical") != 0) && currentFule > 0)
+        {
+            jetPackParticles.transform.rotation = Quaternion.Slerp(jetPackParticles.transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), jetPackRotationSpeed * Time.deltaTime);
+            jetPackParticles.SetActive(true);
+        }
+        else
+        {
+            jetPackParticles.transform.rotation = savedRotation;
+            jetPackParticles.SetActive(false);
+        }
+
+    }
 }
+    

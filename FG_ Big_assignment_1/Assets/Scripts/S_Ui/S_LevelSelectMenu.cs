@@ -42,4 +42,11 @@ public class S_LevelSelectMenu : MonoBehaviour
             }
         }
     }
+
+    public void ResetProgress()
+    {
+        unlockedLevels = 1;
+        PlayerPrefs.SetInt("Unlocked Levels", unlockedLevels);
+        LevelColor();
+    }
 }
