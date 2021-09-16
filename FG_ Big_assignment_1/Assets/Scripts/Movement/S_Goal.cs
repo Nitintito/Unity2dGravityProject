@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 //[RequireComponent(typeof(Collider2D))]
 public class S_Goal : MonoBehaviour
@@ -13,15 +15,24 @@ public class S_Goal : MonoBehaviour
         win = false;
     }
 
+    void Update()
+    {
+        Debug.Log("Count " + SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("Unlocket " + S_LevelSelectMenu.unlockedLevels);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             win = true;
             winUiCanvas.SetActive(true);
-            S_LevelSelectMenu.unlockedLevels += 1;
-            Debug.Log("You Win!");
-            PlayerPrefs.SetInt("Unlocked Levels", S_LevelSelectMenu.unlockedLevels);
+
+            if (SceneManager.GetActiveScene().buildIndex == S_LevelSelectMenu.unlockedLevels)
+            {
+                S_LevelSelectMenu.unlockedLevels += 1;
+                PlayerPrefs.SetInt("Unlocked Levels", S_LevelSelectMenu.unlockedLevels);
+            }
         }
     }
 

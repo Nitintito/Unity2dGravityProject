@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: 20
-  outerRadius: 35.1
-  outerFalloffRadius: 59.52
+  outerRadius: 35
+  outerFalloffRadius: 60
   innerRadius: 5
   innerFalloffRadius: 1
 --- !u!58 &8487008796948319841

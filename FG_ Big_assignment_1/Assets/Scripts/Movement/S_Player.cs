@@ -15,7 +15,6 @@ public class S_Player : MonoBehaviour
 
     [HideInInspector] public float currentFule;
 
-
     private bool requestMove;
     private bool requestDash;
 
@@ -26,7 +25,6 @@ public class S_Player : MonoBehaviour
 
     private Rigidbody2D rb;
     S_FuleUi fuleUi;
-
 
     void Awake()
     {
