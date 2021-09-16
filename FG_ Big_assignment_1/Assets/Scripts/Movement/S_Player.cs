@@ -113,10 +113,13 @@ public class S_Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Trap"))
+        if (collision.gameObject.CompareTag("Trap") )
         {
             Destroy(gameObject);
-            S_UiManager.levelFaild = true;
+            if (!S_Goal.win)
+            {
+                S_UiManager.levelFaild = true;
+            }
         }
     }
 
