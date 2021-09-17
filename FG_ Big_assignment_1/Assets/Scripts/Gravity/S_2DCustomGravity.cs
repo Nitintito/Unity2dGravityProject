@@ -5,8 +5,8 @@ using UnityEngine;
 public static class S_2DCustomGravity
 {
 	/*
-	  *This script adds gravitational force to all objects in the gravitySource list.
-	  */
+	* This script adds gravitational force to all objects in the gravitySource list.
+	*/
 	static List<S_2DGravitySource> sources = new List<S_2DGravitySource>();
 
 	public static Vector2 GetGravity(Vector2 position) //Loops trough all active sources of gravity and acumulates thier gravity
@@ -18,6 +18,7 @@ public static class S_2DCustomGravity
 		}
 		return g;
 	}
+
 	public static Vector2 GetGravity(Vector2 position, out Vector2 upAxis) //Loops trough all active sources of gravity and acumulates thier gravity and gets the up vector of them
 	{
 		Vector2 g = Vector2.zero;
