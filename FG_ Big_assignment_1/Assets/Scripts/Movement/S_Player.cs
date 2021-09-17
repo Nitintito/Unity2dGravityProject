@@ -44,7 +44,7 @@ public class S_Player : MonoBehaviour
     {
         CheckForInput();
         UpdateFule();
-        ParticleSpawner();
+        Jatpack();
     }
 
     private void FixedUpdate()
@@ -151,7 +151,7 @@ public class S_Player : MonoBehaviour
             requestDash = true;
     }
 
-    private void ParticleSpawner()
+    private void Jatpack()
     {
         Quaternion savedRotation = jetPackParticles.transform.rotation; ;
         float angle = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * Mathf.Rad2Deg;
